@@ -86,7 +86,11 @@ The result is a multimodal friction surface used for multipath accumulation.
 
 ### Multimodal Extraction Flow Map
 
-![Task1 Output](data/figures/visibility_overlay.png)
+## Multimodal Movement Probability Surface
+
+![Task 1 Movement](data/figures/task1_movement_probability.png)
+
+This surface represents accumulated least-cost routing from building centroids toward extraction nodes. Structured corridors emerge where terrain resistance, radar-derived roughness, and architectural constraints converge.
 
 Final Output:
 ```
@@ -98,16 +102,6 @@ Emergent corridors demonstrate how terrain and structural constraints guide prob
 
 ---
 
-## Evaluation
-
-Given the absence of ground-truth trajectory data, Ortho high-intensity regions were used as a weak corridor proxy.
-
-Evaluation Metrics:
-- Confusion Matrix
-- Precision
-- Recall
-- F1 Score
-- ROC-AUC
 
 Findings:
 - Zero structural violations
