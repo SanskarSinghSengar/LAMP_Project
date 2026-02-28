@@ -1,0 +1,68 @@
+import numpy as np
+import rasterio
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, roc_auc_score
+
+# ------------------------------------------------
+# PATHS
+# ------------------------------------------------
+
+PROB_PATH = "outputs/extraction_multipath_probability_surface.tif"
+ORTHO_PATH = "data/raw/task1/OrthoImage_Subset.tif"
+
+THRESHOLD = 0.7   # predicted movement threshold
+
+
+# ------------------------------------------------
+# LOAD PREDICTION
+# ------------------------------------------------
+
+with rasterio.open(PROB_PATH) as src:
+    prob = src.read(1)
+
+prob_binary = (prob > THRESHOLD).astype(int)
+
+# ------------------------------------------------
+# LOAD ORTHO AS PROXY GROUND TRUTH
+# ------------------------------------------------
+
+with rasterio.open(ORTHO_PATH) as src:
+    ortho = src.read(1)
+
+# Normalize
+ortho_norm = (ortho - ortho.min()) / (ortho.max() - ortho.min())
+
+# Assume bright regions = path
+ground_truth = (ortho_norm > np.percentile(ortho_norm, 70)).astype(int)
+
+# Resize if needed
+min_rows = min(prob_binary.shape[0], ground_truth.shape[0])
+min_cols = min(prob_binary.shape[1], ground_truth.shape[1])
+
+prob_binary = prob_binary[:min_rows, :min_cols]
+ground_truth = ground_truth[:min_rows, :min_cols]
+
+
+# ------------------------------------------------
+# FLATTEN ARRAYS
+# ------------------------------------------------
+
+y_pred = prob_binary.flatten()
+y_true = ground_truth.flatten()
+
+# ------------------------------------------------
+# METRICS
+# ------------------------------------------------
+
+cm = confusion_matrix(y_true, y_pred)
+precision = precision_score(y_true, y_pred)
+recall = recall_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred)
+auc = roc_auc_score(y_true, prob.flatten()[:len(y_true)])
+
+print("\nConfusion Matrix:")
+print(cm)
+
+print("\nPrecision:", precision)
+print("Recall:", recall)
+print("F1 Score:", f1)
+print("ROC AUC:", auc)

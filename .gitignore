@@ -1,0 +1,11 @@
+# Ignore raw and processed heavy data
+data/raw/
+data/processed/
+
+# Ignore large raster files
+*.tif
+*.aux.xml
+
+# Ignore environment + system
+__pycache__/
+.vscode/
