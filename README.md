@@ -69,10 +69,7 @@ To increase environmental realism, additional spatial modalities were included.
 
 Total Cost Surface:
 
-    0.6 × Slope
-  + 0.2 × SAR Roughness
-  + 0.1 × Ortho Corridor Signal
-  + 0.1 × Spatial Centrality Bias
+    0.6 × Slope + 0.2 × SAR Roughness + 0.1 × Ortho Corridor Signal + 0.1 × Spatial Centrality Bias
 
 Building cells assigned high obstruction cost.
 
