@@ -142,15 +142,15 @@ Three observer positions were modeled using a 3D ray-based line-of-sight algorit
 
 ### Observer 1
 
-![Observer 1](data/figures/individual/observer_0.png)
+![Observer 1](data/figures/observer_map/Observer_0_Map.png)
 
 ### Observer 2
 
-![Observer 2](data/figures/individual/observer_1.png)
+![Observer 2](data/figures/observer_map/Observer_1_Map.png)
 
 ### Observer 3
 
-![Observer 3](data/figures/individual/observer_2.png)
+![Observer 3](data/figures/observer_map/Observer_2_Map.png)
 
 Each observer occupies a distinct visual field shaped by terrain and architecture.
 
